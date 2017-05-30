@@ -140,7 +140,7 @@ function getPlugins() {
     }));
 
     plugins.push(new AotPlugin({
-      "mainPath": "index.ts",
+      "mainPath": "main.ts",
       "hostReplacementPaths": {
         "environments/index.ts": "environments/index.prod.ts"
       },
@@ -161,7 +161,7 @@ function getPlugins() {
 
   } else {
     plugins.push(new AotPlugin({
-      "mainPath": "index.ts",
+      "mainPath": "main.ts",
       "hostReplacementPaths": {
         "environments/index.ts": "environments/index.ts"
       },
@@ -220,7 +220,7 @@ module.exports = {
   },
   "entry": {
     "main": [
-      "./src/index.ts"
+      "./src/main.ts"
     ],
     "polyfills": [
       "./src/polyfills.ts"
