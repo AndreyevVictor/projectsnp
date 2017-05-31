@@ -1,5 +1,6 @@
+import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { Component } from '@angular/core';
-import { ElectronService } from './providers/electron.service';
+import { ElectronService } from '../providers/electron.service';
 
 @Component({
   selector: 'app-root',
