@@ -1,3 +1,4 @@
+import * as d3 from '../helpers/d3.export'
 import { Component, OnInit } from '@angular/core';
 
 @Component({
