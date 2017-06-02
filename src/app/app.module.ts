@@ -9,6 +9,8 @@ import { MenuComponent } from './menu/menu.component';
 import { UploadDataComponent } from './upload/data/upload.data.component';
 
 import { ElectronService } from './providers/electron.service';
+import { UploadService } from './shared/services/upload.service';
+import { ScoringAlgorithmService } from './shared/services/scoring.algorithm.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { ElectronService } from './providers/electron.service';
     FormsModule
   ],
   providers: [
-    ElectronService
+    ElectronService,
+    UploadService,
+    ScoringAlgorithmService
     ],
   bootstrap: [AppComponent]
 })

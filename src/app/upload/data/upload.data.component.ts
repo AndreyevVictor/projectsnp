@@ -5,8 +5,7 @@ import { ScoringAlgorithmService } from '../../shared/services/scoring.algorithm
 @Component({
   selector: 'app-upload-data',
   templateUrl: './upload.data.component.html',
-  styleUrls: ['./upload.data.component.scss'],
-  providers: [UploadService, ScoringAlgorithmService]
+  styleUrls: ['./upload.data.component.scss']
 })
 export class UploadDataComponent implements OnInit {
   
