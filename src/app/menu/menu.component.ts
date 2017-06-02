@@ -1,4 +1,4 @@
-import * as d3 from '../helpers/d3.export'
+import * as d3 from '../shared/helpers/d3.export'
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  title = `App works !`;
+  title = `Menu`;
 
   constructor() { }
 
