@@ -3,10 +3,10 @@ import { Locus } from '../../shared/models/locus.model';
 
 @Injectable()
 export class ScoringAlgorithmService {
-    locusData:Locus[] = new Array<Locus>();
+    locusData:Map<string, Array<Locus>> = new Map();
+
     
-    processData(data:Locus[]):void {      
+    processData(data:Map<string, Array<Locus>>):void {      
        this.locusData = data;
-       
     }
 }
