@@ -20,7 +20,7 @@ export class UploadService {
                 }
             }
         });
-
+        
         return locusData;
     }
 }
