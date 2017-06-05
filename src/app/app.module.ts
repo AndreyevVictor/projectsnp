@@ -11,12 +11,18 @@ import { UploadDataComponent } from './upload/data/upload.data.component';
 import { ElectronService } from './providers/electron.service';
 import { UploadService } from './shared/services/upload.service';
 import { ScoringAlgorithmService } from './shared/services/scoring.algorithm.service';
+import { PolarComponent } from './plots/polar/polar.component';
+import { CountsComponent } from './plots/counts/counts.component';
+import { DensityComponent } from './plots/density/density.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    UploadDataComponent
+    UploadDataComponent,
+    PolarComponent,
+    CountsComponent,
+    DensityComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +32,7 @@ import { ScoringAlgorithmService } from './shared/services/scoring.algorithm.ser
     ElectronService,
     UploadService,
     ScoringAlgorithmService
-    ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
