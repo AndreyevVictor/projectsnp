@@ -36,8 +36,8 @@ export const Plots: Plot[] = [
   {x: 0.96, y: 0.934, color: 'green'}
 ];
 
-export const LocH: Line = {start: {x:0, y:1.1}, end: {x:1, y:1.1}, color: "red"};
+export const LocH: Line = {start: {x:0.2, y:1.1}, end: {x:1, y:1.1}, color: "red"};
 
-export const LocU: Line = {start: {x:0, y:0.4}, end: {x:1, y:0.4}, color: "blue"};
+export const LocU: Line = {start: {x:0.2, y:0.4}, end: {x:1, y:0.4}, color: "blue"};
 
 export const LeftLimit: Line = {start: {x:0.2, y:0}, end: {x:0.2, y:1.7}, color: "gray"};

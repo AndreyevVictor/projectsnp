@@ -18,7 +18,7 @@ const DEFAULT_OPTS = {
     buildVersion: buildVersion
 };
 
-const icon = 'assets/favicon';
+const icon = 'src/assets/Gene';
 
 if (icon) {
     DEFAULT_OPTS.icon = icon;
@@ -50,7 +50,7 @@ function pack(plat, arch, cb) {
         })()
     };
 
-    const opts = Object.assign({}, DEFAULT_OPTS, {
+    const opts = Object.assign({}, DEFAULT_OPTS, iconObj, {
         platform: plat,
         arch,
         prune: true,
