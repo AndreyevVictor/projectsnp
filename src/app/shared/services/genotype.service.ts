@@ -58,7 +58,7 @@ export class GenotypeService {
     }
 
     findPeaks(range: number) {
-        let peaks:number[] = new Array<number>(); 
+        let peakIDs:number[] = new Array<number>(); 
         let previousSign: string;
         let density = this.genotype.density.y;
        
@@ -67,12 +67,12 @@ export class GenotypeService {
             if (!previousSign) {
                 previousSign = currentSign;
             } else if (currentSign !== previousSign){
-                peaks.push($index);
+                peakIDs.push($index);
                 previousSign = currentSign;
             }
         });
 
-        peaks = peaks.filter(peak => {
+        peakIDs = peakIDs.filter(peak => {
             let hightPoint: number = peak - range + 1;
             hightPoint = hightPoint > 0 ? hightPoint : 1;
             let lowPoint: number = peak + range + 1;
@@ -83,6 +83,36 @@ export class GenotypeService {
             });
         });
 
-        this.genotype.peaks = peaks;
+        this.genotype.peakIDs = peakIDs;
+      
+    }
+
+    calculateNmEM() {
+        let values: number[] = new Array<number>();
+        this.genotype.peakIDs.forEach(id => {
+            values.push(this.genotype.density.x[id]);
+        });
+
+        if (values.length > 3) {
+            let maxID: number;
+            let maxVal: number = 0;
+            values.sort();
+            this.genotype.peakValues.push(values.shift());
+            this.genotype.peakValues[2] = values.pop();
+            this.genotype.peakIDs.pop();
+            this.genotype.peakIDs.shift();
+
+            this.genotype.peakIDs.forEach((id, $index) => {
+                if (maxVal < this.genotype.density.y[id]) {
+                     maxID = $index;
+                }
+            });
+            this.genotype.peakValues[1] = values[maxID];
+                    
+        } else  if (values.length > 1) {
+
+        } else {
+
+        }
     }
 }

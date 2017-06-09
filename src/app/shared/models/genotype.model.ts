@@ -11,7 +11,9 @@ export class Genotype{
     columnPlus: number[] = new Array<number>();
     columnMinus: number[] = new Array<number>();
     theta: number[] = new Array<number>();
-    peaks: number[] = new Array<number>();
+    peakIDs: number[] = new Array<number>();
+    peakValues: number[] = new Array<number>();
+    nmEM: number[] = new Array<number>();
 
     sumA: number = 0;
     sumC: number = 0;
