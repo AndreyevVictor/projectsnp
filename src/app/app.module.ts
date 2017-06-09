@@ -11,6 +11,8 @@ import { UploadDataComponent } from './upload/data/upload.data.component';
 import { ElectronService } from './providers/electron.service';
 import { UploadService } from './shared/services/upload.service';
 import { ScoringAlgorithmService } from './shared/services/scoring.algorithm.service';
+import { GenotypeService } from './shared/services/genotype.service';
+
 import { PolarComponent } from './plots/polar/polar.component';
 import { CountsComponent } from './plots/counts/counts.component';
 import { DensityComponent } from './plots/density/density.component';
@@ -31,7 +33,8 @@ import { DensityComponent } from './plots/density/density.component';
   providers: [
     ElectronService,
     UploadService,
-    ScoringAlgorithmService
+    ScoringAlgorithmService,
+    GenotypeService
   ],
   bootstrap: [AppComponent]
 })

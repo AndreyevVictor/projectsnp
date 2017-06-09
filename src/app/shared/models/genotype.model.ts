@@ -1,4 +1,5 @@
 import { Locus } from '../../shared/models/locus.model';
+import { Density } from '../../shared/interfaces/density.data';
 
 export class Genotype{
     ID: string;
@@ -9,6 +10,8 @@ export class Genotype{
     columnT: number[] = new Array<number>();
     columnPlus: number[] = new Array<number>();
     columnMinus: number[] = new Array<number>();
+    theta: number[] = new Array<number>();
+    peaks: number[] = new Array<number>();
 
     sumA: number = 0;
     sumC: number = 0;
@@ -22,4 +25,5 @@ export class Genotype{
     uDataID: string[] = new Array<string>();
 
     locusList: Locus[] = new Array<Locus>();
+    density: Density;
 }

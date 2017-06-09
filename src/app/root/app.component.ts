@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ElectronService } from '../providers/electron.service';
 import 'jquery';
-//import 'bootstrap';
-import * as d3 from 'd3';
 
 @Component({
   selector: 'app-root',
