@@ -25,7 +25,8 @@ export class ScoringAlgorithmService {
                 this.genotypeService.calculateLocusRHO();
                 this.genotypeService.calculateDensityData();
                 this.genotypeService.findPeaks(Math.floor(0.05 * genotype.density.x.length));
-                this.genotypeService.calculateNmEM();                
+                this.genotypeService.calculateNmEM();
+                this.genotypeService.calculateScore();               
             } else {
                 //TODO: dispay incorect message
             }

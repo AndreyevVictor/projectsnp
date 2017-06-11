@@ -88,17 +88,16 @@ export class GenotypeService {
     }
 
     calculateNmEM() {
-        let values: number[] = new Array<number>();
         this.genotype.peakIDs.forEach(id => {
-            values.push(this.genotype.density.x[id]);
+            this.genotype.mu.push(this.genotype.density.x[id]);
         });
-
-        if (values.length > 3) {
+        
+        if (this.genotype.mu.length > 3) {
             let maxID: number;
             let maxVal: number = 0;
-            values.sort();
-            this.genotype.peakValues.push(values.shift());
-            this.genotype.peakValues[2] = values.pop();
+            this.genotype.mu.sort();
+            this.genotype.peakValues.push(this.genotype.mu.shift());
+            this.genotype.peakValues[2] = this.genotype.mu.pop();
             this.genotype.peakIDs.pop();
             this.genotype.peakIDs.shift();
 
@@ -107,12 +106,61 @@ export class GenotypeService {
                      maxID = $index;
                 }
             });
-            this.genotype.peakValues[1] = values[maxID];
-                    
-        } else  if (values.length > 1) {
 
+            this.genotype.peakValues[1] = this.genotype.mu[maxID];
+            this.getMinEM();
+
+            if (Math.min.apply(Math, this.genotype.nmEM.mu) < 0.05){
+                 this.getMinEM();
+            }                    
+        } else  if (this.genotype.mu.length > 1) {
+             this.getMinEM();
         } else {
-
+            this.genotype.nmEM.mu = this.genotype.mu;
+            this.genotype.nmEM.sigma.push(this.standardDeviation(this.genotype.theta));
         }
+    }
+
+    calculateScore() {
+        if(!this.genotype.nmEM) {
+            this.genotype.score = 2;
+            //TODO: Display message and build chart
+            // Is it correct case?
+            console.log('Building chart');
+        } else {
+            let sigmaEst = this.genotype.nmEM.mu.sort();
+            // sigma_est <- nmEM$sigma[order(nmEM$mu)] ???
+            if (this.genotype.mu.length > 1){
+                 
+            } else {
+                this.genotype.score = 3;
+                this.genotype.out = [3, 0, this.genotype.theta.length];
+            }
+        }
+    }
+
+    private getMinEM() {
+        //TODO: rework with formula
+        this.genotype.nmEM.loglik = 358;
+        this.genotype.nmEM.mu = [0.0232, 0.4046, 0.9919];
+        this.genotype.nmEM.sigma = [0.01871, 0.29015, 0.00949];
+    }
+    
+    private standardDeviation(values: number[]): number{
+        let avg: number = this.average(values);
+      
+        let squareDiffs = values.map(function(value){
+            return Math.pow(value - avg, 2);
+        });
+  
+        return Math.sqrt(this.average(squareDiffs));
+    }
+
+    private average(data: number[]): number{
+        let sum: number = data.reduce(function(sum: number, value: number){
+            return sum + value;
+        }, 0);
+    
+        return sum / data.length;
     }
 }

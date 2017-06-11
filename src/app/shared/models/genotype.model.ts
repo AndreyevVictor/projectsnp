@@ -1,8 +1,11 @@
 import { Locus } from '../../shared/models/locus.model';
+import { MinEM } from "../../shared/models/minEM.model";
 import { Density } from '../../shared/interfaces/density.data';
 
 export class Genotype{
     ID: string;
+    score: number;
+    out: any; 
     sampleIDs: string[] = new Array<string>();
     columnA: number[] = new Array<number>();
     columnC: number[] = new Array<number>();
@@ -13,7 +16,8 @@ export class Genotype{
     theta: number[] = new Array<number>();
     peakIDs: number[] = new Array<number>();
     peakValues: number[] = new Array<number>();
-    nmEM: number[] = new Array<number>();
+    mu: number[] = new Array<number>();
+    nmEM: MinEM = new MinEM();
 
     sumA: number = 0;
     sumC: number = 0;
