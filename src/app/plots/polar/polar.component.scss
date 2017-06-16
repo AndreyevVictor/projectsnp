@@ -1,3 +1,31 @@
+.wrapper {
+  .tooltip-polar, .menu-polar {
+      position: absolute;
+      text-align: left;
+      line-height: 16px;
+      width: auto;
+      height: auto;
+      padding: 10px;
+      font: 12px sans-serif;
+      background: #FAFAD2;
+      border: 1px solid #000000;
+      border-radius: 8px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s;
+  }
+  .menu-polar {
+    div {
+      cursor: pointer;
+      padding: 5px;
+      z-index: 10;
+      border-bottom: 1px solid transparent;
+      &:hover {
+        border-bottom-color: black;
+      }
+    }
+  }
+}
 .red {
     background-color: red;
 }

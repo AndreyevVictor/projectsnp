@@ -8,7 +8,8 @@ import { ScoringAlgorithmService } from '../../shared/services/scoring.algorithm
   styleUrls: ['./upload.data.component.scss']
 })
 export class UploadDataComponent implements OnInit {
-  
+  dataLoaded: boolean = false;
+
   constructor(private uploadService: UploadService, private scoringAlgorithmService: ScoringAlgorithmService) { }
 
   ngOnInit() {}
@@ -19,7 +20,8 @@ export class UploadDataComponent implements OnInit {
         let reader:FileReader = new FileReader();
         reader.onload = () => {
             let locusData = this.uploadService.parseData(reader.result);
-            this.scoringAlgorithmService.processData(locusData);
+            this.scoringAlgorithmService.processingData(locusData);
+            this.dataLoaded = true;
         }
         reader.readAsText(input.files[index]);
     };

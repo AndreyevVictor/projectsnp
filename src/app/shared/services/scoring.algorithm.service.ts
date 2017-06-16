@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Locus } from '../../shared/models/locus.model';
 import { Genotype } from '../../shared/models/genotype.model';
 import { Constants } from '../../shared/models/app.constants';
-import { DensityData } from '../../shared/interfaces/density.data';
+import { DensityData } from '../../shared/models/temp/temp.data';
 import { GenotypeService } from "./genotype.service";
 
 @Injectable()
@@ -11,7 +11,7 @@ export class ScoringAlgorithmService {
 
     constructor(private genotypeService: GenotypeService){};
     
-    processData(data:Map<string, Genotype>):void {      
+    processingData(data:Map<string, Genotype>):void {      
         data.forEach((genotype: Genotype) => {
             this.genotypeService.genotype = genotype;
             this.genotypeService.processingSNPColumns();
@@ -30,6 +30,8 @@ export class ScoringAlgorithmService {
             } else {
                 //TODO: dispay incorect message
             }
+
+            this.locusData.set(genotype.ID, this.genotypeService.genotype);
         });
     }
 

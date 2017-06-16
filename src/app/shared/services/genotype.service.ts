@@ -1,17 +1,28 @@
 import { Injectable } from '@angular/core';
+import { Polar } from '../../shared/models/polar.model';
+import { Counts } from '../../shared/models/counts.model';
+import { Density } from '../../shared/models/density.model';
 import { Locus } from '../../shared/models/locus.model';
 import { Genotype } from '../../shared/models/genotype.model';
 import { Constants } from '../../shared/models/app.constants';
-import { DensityData } from '../../shared/interfaces/density.data';
+import { DensityData } from '../../shared/models/temp/temp.data';
+import {NormalDistributionService} from './normal.distribution.service'
+import { UtilsService } from "../../shared/helpers/utils.service";
 
 @Injectable()
 export class GenotypeService {
     genotype: Genotype;
 
+    constructor(private utils: UtilsService){}
+
     processingSNPColumns() {
+        let filteredList: Locus[] = new Array<Locus>();
         this.genotype.locusList.forEach((locus, $index) => {
             let sum: number = 0;
             let arr: number[] = new Array<number>();
+            let polar: Polar = new Polar();
+            let counts: Counts = new Counts();
+            let density: Density = new Density();
             
             if (this.genotype.sumA > 0){
                 arr.push(locus.propA);
@@ -37,19 +48,43 @@ export class GenotypeService {
                 locus.theta = 2/Math.PI*Math.atan(arr[0]/arr[1]);
                 this.genotype.theta.push(Math.round(2/Math.PI*Math.atan(arr[0]/arr[1])* 10000) / 10000 );
                 this.genotype.keepCount += 1;
+                
+                polar.x = arr[0];
+                polar.y = arr[1];
+                polar.color = "#ff0000"; 
+                polar.tooltipData = {data: '[200;300]', sample: 'MA101010', a: '3(A)', g: '10(B)'};
+                this.genotype.PolarData.push(polar);
+
+                counts.x = arr[0];
+                counts.y = arr[1];
+                counts.color = "#ff0000"; 
+                counts.tooltipData = {data: '[200;300]', sample: 'MA101010', a: '3(A)', g: '10(B)'};
+                this.genotype.CountsData.push(counts);
+
+                density.x = locus.theta;
+                density.y = sum;
+                density.color = "#ff0000"; 
+                density.tooltipData = {data: '[200;300]', sample: 'MA101010', a: '3(A)', g: '10(B)'};
+                this.genotype.DensityData.push(density);
+
+                filteredList.push(locus);
             } else {
+                //Do we need to anything here??
                 //genotype.uCount += 1;
                 //genotype.uData.push(locus);
-                //genotype.uDataID.push(locus.sampleID);
-                this.genotype.locusList.splice($index, 1); 
-                this.genotype.sampleIDs.splice($index, 1);               
+                //genotype.uDataID.push(locus.sampleID);          
             }
         });
+
+        this.genotype.locusList = filteredList;
     }
 
     calculateLocusRHO() {
-        this.genotype.locusList.forEach((locus) => {
+        this.genotype.locusList.forEach((locus, $index) => {
             locus.rho = locus.rowSum/this.genotype.maxRowSum;
+
+            this.genotype.DensityData[$index].y = this.genotype.DensityData[$index].y/this.genotype.maxRowSum;
+            this.performPolarGenotyping(locus, $index);
         });
     }
 
@@ -131,7 +166,7 @@ export class GenotypeService {
             let sigmaEst = this.genotype.nmEM.mu.sort();
             // sigma_est <- nmEM$sigma[order(nmEM$mu)] ???
             if (this.genotype.mu.length > 1){
-                 
+                 let norm: NormalDistributionService = new NormalDistributionService(1, 1);
             } else {
                 this.genotype.score = 3;
                 this.genotype.out = [3, 0, this.genotype.theta.length];
@@ -162,5 +197,20 @@ export class GenotypeService {
         }, 0);
     
         return sum / data.length;
+    }
+
+    private performPolarGenotyping(locus: Locus, index: number) {
+        let x: number = this.genotype.PolarData[index].x/this.genotype.maxRowSum;
+        let y: number = this.genotype.PolarData[index].y/this.genotype.maxRowSum;
+        if(this.utils.isNotNullAndUndefined(x) && this.utils.isNotNullAndUndefined(y)){
+            let angle: number = Math.PI / 4;
+            if (x !== 0 || y !== 0){
+                angle = Math.atan(y/x);
+            }
+
+            this.genotype.PolarData[index].x = 1 - (Math.log( Constants.logOffset + (1 - Constants.logOffset) * Math.sqrt(x*x + y*y)) / Math.log(Constants.logOffset));
+            this.genotype.PolarData[index].y = angle;
+                
+        }
     }
 }

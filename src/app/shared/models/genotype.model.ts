@@ -1,6 +1,9 @@
 import { Locus } from '../../shared/models/locus.model';
 import { MinEM } from "../../shared/models/minEM.model";
-import { Density } from '../../shared/interfaces/density.data';
+import { DensityTemp } from '../../shared/models/temp/temp.data';
+import { Polar } from "../../shared/models/polar.model";
+import { Counts } from "../../shared/models/counts.model";
+import { Density } from "../../shared/models/density.model";
 
 export class Genotype{
     ID: string;
@@ -17,7 +20,11 @@ export class Genotype{
     peakIDs: number[] = new Array<number>();
     peakValues: number[] = new Array<number>();
     mu: number[] = new Array<number>();
+
     nmEM: MinEM = new MinEM();
+    PolarData: Polar[] = new Array<Polar>();
+    CountsData: Counts[] = new Array<Counts>();
+    DensityData: Density[] = new Array<Density>();
 
     sumA: number = 0;
     sumC: number = 0;
@@ -31,5 +38,5 @@ export class Genotype{
     uDataID: string[] = new Array<string>();
 
     locusList: Locus[] = new Array<Locus>();
-    density: Density;
+    density: DensityTemp;
 }

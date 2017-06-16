@@ -1,0 +1,32 @@
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Sample</th>
+        <th></th>
+        <th>Score</th>
+        <th>Loc Score</th>
+        <th># A</th>
+        <th># C</th>
+        <th># G</th>
+        <th># T</th>
+        <th># +</th>
+        <th># -</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tableData" class="row-{{item.color}}" [ngClass]="{'active': item.active}">
+        <td>{{item.sample}}</td>
+        <td><input type="checkbox" [checked]="item.active" (change)="item.active=!item.active"></td>
+        <td>{{item.score}}</td>
+        <td>{{item.loc_score}}</td>
+        <td>{{item.a}}</td>
+        <td>{{item.c}}</td>
+        <td>{{item.g}}</td>
+        <td>{{item.t}}</td>
+        <td>{{item.plus}}</td>
+        <td>{{item.minus}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,2 +1,5 @@
 
 <input type="file" (change)="openFile($event)" multiple accept="text/plain"/>
+<div *ngIf="dataLoaded" >
+   <app-menu></app-menu>
+</div>

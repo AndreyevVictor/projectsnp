@@ -2,4 +2,13 @@
   <h1 class="title">
     {{title}}
   </h1>
+  <menu>
+    <li [ngClass]="{'active': isActive == 0}" (click)="isActive = 0">Polar Plot</li>
+    <li [ngClass]="{'active': isActive == 1}" (click)="isActive = 1">Counts Plot</li>
+    <li [ngClass]="{'active': isActive == 2}" (click)="isActive = 2">Density Plot</li>
+  </menu>
+  <app-polar [hidden]="isActive != 0"></app-polar>
+  <app-counts [hidden]="isActive != 1"></app-counts>
+  <app-density [hidden]="isActive != 2"></app-density>
+  <app-table></app-table>
 </div>

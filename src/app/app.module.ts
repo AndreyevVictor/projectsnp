@@ -12,10 +12,16 @@ import { ElectronService } from './providers/electron.service';
 import { UploadService } from './shared/services/upload.service';
 import { ScoringAlgorithmService } from './shared/services/scoring.algorithm.service';
 import { GenotypeService } from './shared/services/genotype.service';
+import { UtilsService } from "./shared/helpers/utils.service";
+
+import { StylePipe } from './shared/pipes/style.pipe';
+
 
 import { PolarComponent } from './plots/polar/polar.component';
 import { CountsComponent } from './plots/counts/counts.component';
 import { DensityComponent } from './plots/density/density.component';
+
+import {TableComponent} from './table/table.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +30,9 @@ import { DensityComponent } from './plots/density/density.component';
     UploadDataComponent,
     PolarComponent,
     CountsComponent,
-    DensityComponent
+    DensityComponent,
+    TableComponent,
+    StylePipe
   ],
   imports: [
     BrowserModule,
@@ -34,7 +42,8 @@ import { DensityComponent } from './plots/density/density.component';
     ElectronService,
     UploadService,
     ScoringAlgorithmService,
-    GenotypeService
+    GenotypeService,
+    UtilsService
   ],
   bootstrap: [AppComponent]
 })

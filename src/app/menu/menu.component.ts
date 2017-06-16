@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  title = `Menu`;
+  title: string = `Menu`;
+  isActive: number = 0;
 
   constructor() { }
 

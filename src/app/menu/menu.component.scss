@@ -1,8 +1,20 @@
 .container {
     /* version standardisée */
+    padding: 10px;
     .title {
         color: #ff0000;
         margin: 0;
         padding: 50px 20px;
+    }
+    menu {
+      li {
+        display: inline;
+        padding: 10px;
+        border: 1px solid black;
+        cursor: pointer;
+        &.active {
+          font-weight: bold;
+        }
+      }
     }
 }
